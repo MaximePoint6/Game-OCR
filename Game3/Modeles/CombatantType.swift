@@ -8,7 +8,6 @@
 import Foundation
 
 enum CombatantType: CaseIterable {
-    
     case Warrior
     case Magus
     case Colossus
@@ -16,10 +15,10 @@ enum CombatantType: CaseIterable {
     
     public func getName() -> String {
         switch self {
-        case .Warrior: return "Warrior"
-        case .Magus: return "Magus"
-        case .Colossus: return "Colossus"
-        case .Dwarf: return "Dwarf"
+        case .Warrior: return "Warrior 🥷"
+        case .Magus: return "Magus 🧙‍♂️"
+        case .Colossus: return "Colossus 🧝"
+        case .Dwarf: return "Dwarf 🧌"
         }
     }
     

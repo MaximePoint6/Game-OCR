@@ -17,6 +17,4 @@ class Player {
         self.playerTeam = playerTeam
         self.deadCombatants = deadCombatants
     }
-    
-    
 }

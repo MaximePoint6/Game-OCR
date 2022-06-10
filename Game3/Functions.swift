@@ -27,31 +27,23 @@ func teamSelection(playerName: String) -> [Combatant] {
     
     var combatants = [Combatant]()
     
-    //    print("""
-    //        Bienvenue \(playerName) - Veuillez choisir 3 personnages pour rejoindre votre équipe. Voici les personnages disponibles :
-    //        1- "\(combatantTypes[0].typeName)" - vie : \(combatantTypes[0].life) - puissance : \(combatantTypes[0].weapon.weaponStrength)
-    //        2- "\(combatantTypes[1].typeName)" - vie : \(combatantTypes[1].life) - puissance : \(combatantTypes[1].weapon.weaponStrength)
-    //        3- "\(combatantTypes[2].typeName)" - vie : \(combatantTypes[2].life) - puissance : \(combatantTypes[2].weapon.weaponStrength)
-    //        4- "\(combatantTypes[3].typeName)" - vie : \(combatantTypes[3].life) - puissance : \(combatantTypes[3].weapon.weaponStrength)
-    //        """)
-    
     print("Bienvenue \(playerName) - Veuillez choisir 3 personnages pour rejoindre votre équipe. Voici les personnages disponibles :")
+    var counter = 1
     for combatantType in CombatantType.allCases {
         print("""
-            Combatant : \(combatantType.getName()) - Max health : \(combatantType.getMaxHealth()) - Weapon : \(combatantType.getWeapon().getName()) - Weapon Strenght : \(combatantType.getWeapon().weaponStrength())
+            Combatant \(counter) : \(combatantType.getName()) - Max health : \(combatantType.getMaxHealth()) - Weapon : \(combatantType.getWeapon().getName()) - Weapon Strenght : \(combatantType.getWeapon().weaponStrength())
             """)
+        counter += 1
     }
     
     for i in 1...3 {
-        
         if i == 1 {
-            print("\(playerName) - Entrez le numéro du personnage que vous souhaitez dans votre équipe.")
+            print("\(playerName) - Entrez le numéro du 1er personnage que vous souhaitez dans votre équipe.")
         } else if i == 2 {
             print("\(playerName) - Entrez le numéro du 2ème personnage que vous souhaitez dans votre équipe.")
         } else {
             print("\(playerName) - Entrez le numéro du denier personnage que vous souhaitez dans votre équipe.")
         }
-        
         let choice = newCombatant()
         
         print("Quel surnom souhaitez-vous lui donner ?")
@@ -59,8 +51,8 @@ func teamSelection(playerName: String) -> [Combatant] {
         
         let selectedCombatant = Combatant(type: CombatantType.allCases[choice-1], name: combatantName)
         combatants.append(selectedCombatant)
-        
     }
+    
     return combatants
 }
 
@@ -79,27 +71,6 @@ func resumeGame(game: Game) {
         }
     }
     
-    
-//    print("""
-//    Voici un résumé du jeu :
-//    ----------
-//    Equipe de \(game.player1.playerName) :
-//    """)
-//    for combatant in 0...(game.player1.playerTeam.count)-1 {
-//        print("""
-//            Combattant \(combatant+1)- "\(game.player1.playerTeam[combatant].combatantName)" - vie : \(game.player1.playerTeam[combatant].combatantType.life) - puissance : \(game.player1.playerTeam[combatant].combatantType.weapon.weaponStrength)
-//            """)
-//    }
-//    print("""
-//    ----------
-//    Equipe de \(game.player2.playerName) :
-//    """)
-//    for combatant in 0...(game.player2.playerTeam.count)-1 {
-//        print("""
-//            Combattant \(combatant+1)- "\(game.player2.playerTeam[combatant].combatantName)" - vie : \(game.player2.playerTeam[combatant].combatantType.life) - puissance : \(game.player2.playerTeam[combatant].combatantType.weapon.weaponStrength)
-//            """)
-//    }
-//    print("----------")
 }
 
 
@@ -165,22 +136,16 @@ func nameVerification() -> String {
 }
 
 
-func firstPlayerToPlay(game: Game) -> Player {
-    
-    var player: Player
-    let randomInt = Int.random(in: 1...Game.numbersOfPlayers)
-    
-    player = game.players[randomInt]
-//
-//    if randomInt == 1 {
-//        player = game.player1
-//    } else {
-//        player = game.player2
-//    }
-    
-    print("\(player.playerName), tu as été tiré au sort pour commencer la partie !")
-    return player
-}
+//func firstPlayerToPlay(game: Game) -> Player {
+//    
+//    var player: Player
+//    let randomInt = Int.random(in: 1...Game.numbersOfPlayers)
+//    
+//    player = game.players[randomInt]
+//    print("\(player.playerName), tu as été tiré au sort pour commencer la partie !")
+//    
+//    return player
+//}
 
 
 //func attack(attackingPlayer: Player, defensivePlayer: Player) -> Player {

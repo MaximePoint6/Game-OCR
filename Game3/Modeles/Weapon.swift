@@ -7,19 +7,7 @@
 
 import Foundation
 
-//class Weapon {
-//    var weaponName: String = ""
-//    var weaponStrength: Int = 1
-//
-//    init(weaponName: String, weaponStrength: Int) {
-//        self.weaponName = weaponName
-//        self.weaponStrength = weaponStrength
-//    }
-//}
-
-
 enum Weapon {
-    
     case Sword
     case Slingshot
     case Bow
@@ -43,11 +31,3 @@ enum Weapon {
         }
     }
 }
-
-
-//var weapons: [Weapon] = [
-//    Weapon(weaponName: "Epée", weaponStrength: 18),
-//    Weapon(weaponName: "Lance-pierre", weaponStrength: 8),
-//    Weapon(weaponName: "Arc", weaponStrength: 12),
-//    Weapon(weaponName: "Hache", weaponStrength: 25)
-//]

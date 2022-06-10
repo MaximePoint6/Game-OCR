@@ -8,9 +8,6 @@
 import Foundation
 
 class Game {
-//    var player1 = Player()
-//    var player2 = Player()
-    
     var players: [Player]
     
     required init(players: [Player]) {
@@ -18,5 +15,4 @@ class Game {
     }
     
     static let numbersOfPlayers = 2
-    
 }
