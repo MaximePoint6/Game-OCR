@@ -31,52 +31,36 @@ func mainFunction() {
         
         let player = Player(playerName: playerName, playerTeam: playerTeam)
         players.append(player)
+        print("----------")
     }
     
     let game = Game(players: players)
         
-        
-        
-        
-        
-        
-//        if player == 1 {
-//            game.player1.playerName = choiceOfName(playerNumber: player)
-//            game.player1.playerTeam = teamSelection(playerName: game.player1.playerName)
-//        } else if player == 2 {
-//            game.player2.playerName = choiceOfName(playerNumber: player)
-//            game.player2.playerTeam = teamSelection(playerName: game.player2.playerName)
-//        } else {
-//            //
-//        }
-    resumeGame(game: game)
+    gameRecap(game: game)
     
-//    print("Le combat peut maintenant commencer !")
-//    let firstPlayer = firstPlayerToPlay(game: game)
-//
-//    var attackingPlayer: Player
-//    var defensivePlayer: Player
-//    var currentPlayer = firstPlayer
-//
-//    repeat {
-//        if currentPlayer.playerName == game.player1.playerName {
-//            attackingPlayer = game.player1
-//            defensivePlayer = game.player2
-//            game.player2 = attack(attackingPlayer: attackingPlayer, defensivePlayer: defensivePlayer)
-//            currentPlayer = game.player2
-//        } else {
-//            attackingPlayer = game.player2
-//            defensivePlayer = game.player1
-//            game.player1 = attack(attackingPlayer: attackingPlayer, defensivePlayer: defensivePlayer)
-//            currentPlayer = game.player1
-//        }
-//        print("########### Tour suivant ###########")
-//    } while game.player1.deadCombattants.count < 3 && game.player2.deadCombattants.count < 3
-//
-//    if game.player1.deadCombattants.count == 3 {
-//        print("🎉🎉🎉 Bravo \(game.player2.playerName), tu as gagné cette partie")
-//    } else {
-//        print("🎉🎉🎉 Bravo \(game.player1.playerName), tu as gagné cette partie")
-//    }
-    
+    print("💥💥💥 Le combat peut maintenant commencer ! 💥💥💥")
+    let firstPlayerIndex = firstPlayerIndexToPlay(game: game)
+    var attackingPlayerIndex = firstPlayerIndex
+    var defendingPlayerIndex: Int
+    var numberOfTurns: Int = 0
+
+    repeat {
+        if attackingPlayerIndex == 0 {
+            game.players[1] = attack(by: game.players[0], against: game.players[1])
+            attackingPlayerIndex = 1
+            defendingPlayerIndex = 0
+        } else {
+            game.players[0] = attack(by: game.players[1], against: game.players[0])
+            attackingPlayerIndex = 0
+            defendingPlayerIndex = 1
+        }
+        numberOfTurns += 1
+        print("---------- Tour suivant ----------")
+    } while game.players[defendingPlayerIndex].deadCombatants.count < 3 && game.players[attackingPlayerIndex].deadCombatants.count < 3
+
+    if game.players[0].deadCombatants.count == 3 {
+        print("🎉🎉🎉 Bravo \(game.players[1].playerName), tu as gagné cette partie en \(numberOfTurns / 2) tours ! 🎉🎉🎉")
+    } else {
+        print("🎉🎉🎉 Bravo \(game.players[0].playerName), tu as gagné cette partie en \(numberOfTurns / 2) tours ! 🎉🎉🎉")
+    }    
 }
