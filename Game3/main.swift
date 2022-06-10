@@ -7,6 +7,17 @@
 
 import Foundation
 
+
+// TODO: - Urgent
+// Vérifier les fonctions d'attaques, essaye de les faire plus courte et plus claire,
+// Mettre des fonctions dans les classes directement, + simple et certainement moins de parametres necessaires dans les fonctions du coup
+// Faire en sorte lors du choix de l'USER soigner ou attaquer on puisse pas mettre autre chose que 1 ou 2
+// Faire la documentation
+// Et normalement c'est fini :)
+
+
+
+
 // MARK: - Main
 
 mainFunction()

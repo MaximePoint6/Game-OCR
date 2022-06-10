@@ -24,10 +24,10 @@ enum CombatantType: CaseIterable {
     
     public func getMaxHealth() -> Int {
         switch self {
-        case .Warrior: return 40
-        case .Magus: return 80
-        case .Colossus: return 60
-        case .Dwarf: return 30
+        case .Warrior: return 30
+        case .Magus: return 50
+        case .Colossus: return 40
+        case .Dwarf: return 20
         }
     }
     
@@ -37,6 +37,15 @@ enum CombatantType: CaseIterable {
         case .Magus: return .Slingshot
         case .Colossus: return .Bow
         case .Dwarf: return .Chopped
+        }
+    }
+    
+    public func getTreatment() -> Treatment {
+        switch self {
+        case .Warrior: return .None
+        case .Magus: return .MagicPotion
+        case .Colossus: return .None
+        case .Dwarf: return .None
         }
     }
 }

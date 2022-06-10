@@ -14,6 +14,7 @@
 		CA47CF9228532A280059F7B8 /* Weapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA47CF9128532A280059F7B8 /* Weapon.swift */; };
 		CA47CF9428532A690059F7B8 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA47CF9328532A690059F7B8 /* Functions.swift */; };
 		CA47CF9828533A5F0059F7B8 /* CombatantType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA47CF9728533A5F0059F7B8 /* CombatantType.swift */; };
+		CA47CF9A285390490059F7B8 /* Treatment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA47CF99285390490059F7B8 /* Treatment.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -37,6 +38,7 @@
 		CA47CF9128532A280059F7B8 /* Weapon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weapon.swift; sourceTree = "<group>"; };
 		CA47CF9328532A690059F7B8 /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		CA47CF9728533A5F0059F7B8 /* CombatantType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombatantType.swift; sourceTree = "<group>"; };
+		CA47CF99285390490059F7B8 /* Treatment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Treatment.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 				CA47CF8F285329F00059F7B8 /* Combatant.swift */,
 				CA47CF9728533A5F0059F7B8 /* CombatantType.swift */,
 				CA47CF9128532A280059F7B8 /* Weapon.swift */,
+				CA47CF99285390490059F7B8 /* Treatment.swift */,
 			);
 			path = Modeles;
 			sourceTree = "<group>";
@@ -160,6 +163,7 @@
 				CA47CF8E285329D30059F7B8 /* Player.swift in Sources */,
 				CA47CF8C285329C30059F7B8 /* Game.swift in Sources */,
 				CA47CF90285329F00059F7B8 /* Combatant.swift in Sources */,
+				CA47CF9A285390490059F7B8 /* Treatment.swift in Sources */,
 				CA47CF9428532A690059F7B8 /* Functions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

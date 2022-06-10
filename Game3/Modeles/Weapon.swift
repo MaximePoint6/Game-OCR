@@ -24,10 +24,10 @@ enum Weapon {
     
     public func weaponStrength() -> Int {
         switch self {
-        case .Sword: return 18
-        case .Slingshot: return 8
-        case .Bow: return 12
-        case .Chopped: return 25
+        case .Sword: return 12
+        case .Slingshot: return 5
+        case .Bow: return 10
+        case .Chopped: return 15
         }
     }
 }

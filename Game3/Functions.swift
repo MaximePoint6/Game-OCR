@@ -7,44 +7,78 @@
 
 import Foundation
 
-// MARK: - Functions
+//======================
+// MARK: - General functions
+//======================
 
 func welcome() {
     print("⚔️⚔️⚔️ Bonjour, commençons une nouvelle partie ! ⚔️⚔️⚔️")
 }
 
 
+func gameRecap(game: Game) {
+    print("Voici un résumé du jeu")
+    print("")
+    for playerNumber in 0..<game.players.count {
+        print("Equipe de \(game.players[playerNumber].playerName) :")
+        playerCombatantsRecap(player: game.players[playerNumber])
+    }
+    print("----------")
+}
+
+
+func playerCombatantsRecap(player: Player) {
+    for combatant in 0..<(player.playerTeam.count) {
+        print("""
+            Combattant \(combatant+1)- "\(player.playerTeam[combatant].name)" - vie : \(player.playerTeam[combatant].currentHP) - puissance de l'arme : \(player.playerTeam[combatant].weapon.weaponStrength()) - Puissance du traitement : \(player.playerTeam[combatant].treatment.treatmentStrength()))
+            """)
+    }
+}
+
+
+func winner(game: Game, numberOfTurns: Int) {
+    let winnerName: Player
+    
+    if game.players[0].teamIsAlive == true {
+        winnerName = game.players[0]
+    } else {
+        winnerName = game.players[1]
+    }
+    print("---------- La partie est finie ! ----------")
+    print("🎉🎉🎉 Bravo \(winnerName.playerName), vous avez gagné cette partie en \(numberOfTurns / 2) attaques ! 🎉🎉🎉")
+    print("Voici les combattants encore vivants 💪 :")
+    playerCombatantsRecap(player: winnerName)
+}
+
+
+//======================
+// MARK: - Player functions
+//======================
+
 func choiceOfName(playerNumber: Int) -> String {
     print("Joueur \(playerNumber) - Quel est votre prénom ?")
     return readText()
 }
-
 
 /// Description
 /// - Parameter playerName: playerName description
 /// - Returns: description
 func teamSelection(playerName: String) -> [Combatant] {
     var combatants = [Combatant]()
-    print("Bienvenue \(playerName) 🤝 - Veuillez choisir 3 personnages pour rejoindre votre équipe. Voici les personnages disponibles :")
+    print("Bienvenue \(playerName) 🤝 - Veuillez choisir \(Player.numberOfCombatants) personnages pour rejoindre votre équipe. Voici les personnages disponibles :")
     var counter = 1
     
     for combatantType in CombatantType.allCases {
         print("""
-            Combattant \(counter) : \(combatantType.getName()) - Vie max : \(combatantType.getMaxHealth()) - Arme : \(combatantType.getWeapon().getName()) - Puissance de l'arme : \(combatantType.getWeapon().weaponStrength())
+            Combattant \(counter) : \(combatantType.getName()) - Vie max : \(combatantType.getMaxHealth()) - Arme : \(combatantType.getWeapon().getName()) - Puissance de l'arme : \(combatantType.getWeapon().weaponStrength()) - puissance du traitement : \(combatantType.getTreatment().treatmentStrength())
             """)
         counter += 1
     }
     
     print("----------")
     
-    for i in 1...3 {
-        if i == 1 {
-            print("1️⃣ \(playerName), entrez le numéro du 1er personnage que vous souhaitez dans votre équipe.")
-        } else if i == 2 {
-            print("2️⃣ \(playerName), entrez le numéro du 2ème personnage que vous souhaitez dans votre équipe.")
-        } else {
-            print("3️⃣ \(playerName), entrez le numéro du denier personnage que vous souhaitez dans votre équipe.")
-        }
+    for i in 1...Player.numberOfCombatants {
+        print("\(playerName), entrez le numéro du personnage que vous souhaitez dans votre équipe (combattant n°\(i) sur \(Player.numberOfCombatants) rejoignant votre équipe)")
         let choice = newCombatant()
         
         print("🗣 Quel surnom souhaitez-vous lui donner ?")
@@ -57,26 +91,9 @@ func teamSelection(playerName: String) -> [Combatant] {
 }
 
 
-func gameRecap(game: Game) {
-    print("Voici un résumé du jeu")
-    print("")
-    for playerNumber in 0..<game.players.count {
-        print("Equipe de \(game.players[playerNumber].playerName) :")
-        
-        playerCombatantsRecap(player: game.players[playerNumber])
-    }
-    print("----------")
-}
-
-
-func playerCombatantsRecap(player: Player) {
-    for combatant in 0..<(player.playerTeam.count) {
-        print("""
-            Combattant \(combatant+1)- "\(player.playerTeam[combatant].name)" - vie : \(player.playerTeam[combatant].currentHP) - puissance : \(player.playerTeam[combatant].weapon.weaponStrength())
-            """)
-    }
-}
-
+//======================
+// MARK: - User interface functions
+//======================
 
 func readInteger() -> Int {
     var readValue: Int?
@@ -141,55 +158,6 @@ func nameVerification() -> String {
 }
 
 
-func firstPlayerIndexToPlay(game: Game) -> Int {
-    let randomInt = Int.random(in: 0..<Game.numbersOfPlayers)
-    print("\(game.players[randomInt].playerName), tu as été tiré au sort pour commencer la partie ! 😃")
-    return randomInt
-}
-
-
-func combat(game: Game) {
-    var attackingPlayerIndex = firstPlayerIndexToPlay(game: game)
-    var defendingPlayerIndex: Int
-    var numberOfTurns: Int = 0
-
-    repeat {
-        if attackingPlayerIndex == 0 {
-            attack(by: game.players[0], against: game.players[1])
-            attackingPlayerIndex = 1
-            defendingPlayerIndex = 0
-        } else {
-            attack(by: game.players[1], against: game.players[0])
-            attackingPlayerIndex = 0
-            defendingPlayerIndex = 1
-        }
-        numberOfTurns += 1
-        print("---------- Tour suivant ----------")
-    } while game.players[defendingPlayerIndex].deadCombatants.count < 3 && game.players[attackingPlayerIndex].deadCombatants.count < 3
-    
-    winner(game: game, numberOfTurns: numberOfTurns)
-}
-
-
-func attack(by attackingPlayer: Player, against defensivePlayer: Player) {
-    print("💪 \(attackingPlayer.playerName), entrez le numéro de votre combattant parmi cette selection :")
-    let attackingCombatant = combatantIndexSelection(player: attackingPlayer)
-
-    print("🫵 Maintenant, entrez le numéro du combattant adverse que vous souhaitez attaquer ? ")
-    let combatantReceivingAnAttack = combatantIndexSelection(player: defensivePlayer)
-
-    let newCombatantLife = defensivePlayer.playerTeam[combatantReceivingAnAttack].currentHP - attackingPlayer.playerTeam[attackingCombatant].weapon.weaponStrength()
-
-    if newCombatantLife <= 0 {
-        defensivePlayer.playerTeam[combatantReceivingAnAttack].currentHP = 0
-        defensivePlayer.deadCombatants.append(defensivePlayer.playerTeam[combatantReceivingAnAttack])
-        defensivePlayer.playerTeam.remove(at: combatantReceivingAnAttack)
-    } else {
-        defensivePlayer.playerTeam[combatantReceivingAnAttack].currentHP = newCombatantLife
-    }
-}
-
-
 func combatantIndexSelection(player: Player) -> Int {
     
     playerCombatantsRecap(player: player)
@@ -210,10 +178,83 @@ func combatantIndexSelection(player: Player) -> Int {
 }
 
 
-func winner(game: Game, numberOfTurns: Int) {
-    if game.players[0].deadCombatants.count == 3 {
-        print("🎉🎉🎉 Bravo \(game.players[1].playerName), tu as gagné cette partie en \(numberOfTurns / 2) attaques ! 🎉🎉🎉")
+//======================
+// MARK: - Combat functions
+//======================
+
+func firstPlayerIndexToPlay(game: Game) -> Int {
+    let randomInt = Int.random(in: 0..<Game.numbersOfPlayers)
+    print("\(game.players[randomInt].playerName), Vous avez été tiré au sort pour commencer la partie ! 😃")
+    return randomInt
+}
+
+
+func combat(game: Game) {
+    var attackingPlayerIndex = firstPlayerIndexToPlay(game: game)
+    var defendingPlayerIndex: Int
+    var numberOfTurns: Int = 0
+    
+    repeat {
+        numberOfTurns += 1
+        print("---------- Tour n°\(numberOfTurns) ----------")
+        if attackingPlayerIndex == 0 {
+            attackOrTreatment(by: game.players[0], against: game.players[1])
+            attackingPlayerIndex = 1
+            defendingPlayerIndex = 0
+        } else {
+            attackOrTreatment(by: game.players[1], against: game.players[0])
+            attackingPlayerIndex = 0
+            defendingPlayerIndex = 1
+        }
+    } while game.players[defendingPlayerIndex].teamIsAlive == true && game.players[attackingPlayerIndex].teamIsAlive == true
+    
+    winner(game: game, numberOfTurns: numberOfTurns)
+}
+
+
+func attackOrTreatment(by attackingPlayer: Player, against defensivePlayer: Player) {
+    print("💪 \(attackingPlayer.playerName), entrez le numéro de votre combattant parmi cette selection :")
+    let activeCombatantIndex = combatantIndexSelection(player: attackingPlayer)
+    
+    if attackingPlayer.playerTeam[activeCombatantIndex].treatment != .None {
+        print("👉 Ce combatant possede un traitement pour soigner un de vos combattants, que souhaitez-vous faire : 1- Soigner 🚑 ou 2- Attaquer ⚔️ ?")
+        let choice = readInteger()
+        if choice == 1 {
+            care(for: attackingPlayer, activeCombatantIndex: activeCombatantIndex)
+        } else {
+            attack(by: attackingPlayer, against: defensivePlayer, activeCombatantIndex: activeCombatantIndex)
+        }
     } else {
-        print("🎉🎉🎉 Bravo \(game.players[0].playerName), tu as gagné cette partie en \(numberOfTurns / 2) attaques ! 🎉🎉🎉")
+        attack(by: attackingPlayer, against: defensivePlayer, activeCombatantIndex: activeCombatantIndex)
+    }
+}
+
+func attack(by attackingPlayer: Player, against defensivePlayer: Player, activeCombatantIndex : Int) {
+    print("🫵 Maintenant, entrez le numéro du combattant adverse que vous souhaitez attaquer ? ")
+    let combatantReceivingAnAttack = combatantIndexSelection(player: defensivePlayer)
+    
+    let newCombatantLife = defensivePlayer.playerTeam[combatantReceivingAnAttack].currentHP - attackingPlayer.playerTeam[activeCombatantIndex].weapon.weaponStrength()
+    
+    if newCombatantLife <= 0 {
+        defensivePlayer.playerTeam[combatantReceivingAnAttack].currentHP = 0
+        defensivePlayer.playerTeam.remove(at: combatantReceivingAnAttack)
+        if defensivePlayer.playerTeam.count <= 0 {
+            defensivePlayer.teamIsAlive = false
+        }
+    } else {
+        defensivePlayer.playerTeam[combatantReceivingAnAttack].currentHP = newCombatantLife
+    }
+}
+
+func care(for attackingPlayer: Player, activeCombatantIndex : Int) {
+    print("🚑 Super le traitment est prêt, entrez le numéro du combattant de votre équipe que vous souhaitez soigner ? ")
+    let combatantReceivingTreatment = combatantIndexSelection(player: attackingPlayer)
+    
+    let newCombatantLife = attackingPlayer.playerTeam[combatantReceivingTreatment].currentHP + attackingPlayer.playerTeam[activeCombatantIndex].weapon.weaponStrength()
+    
+    if newCombatantLife > attackingPlayer.playerTeam[combatantReceivingTreatment].type.getMaxHealth() {
+        attackingPlayer.playerTeam[combatantReceivingTreatment].currentHP = attackingPlayer.playerTeam[combatantReceivingTreatment].type.getMaxHealth()
+    } else {
+        attackingPlayer.playerTeam[combatantReceivingTreatment].currentHP = newCombatantLife
     }
 }
