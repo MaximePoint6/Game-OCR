@@ -20,5 +20,5 @@ class Combatant {
         self.weapon = type.getWeapon()
     }
     
-    static var names: [String] = []
+    static var namesUsed: [String] = []
 }
