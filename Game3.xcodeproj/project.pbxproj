@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		CA47CF832850BA190059F7B8 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA47CF822850BA190059F7B8 /* main.swift */; };
+		CA47CF8C285329C30059F7B8 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA47CF8B285329C30059F7B8 /* Game.swift */; };
+		CA47CF8E285329D30059F7B8 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA47CF8D285329D30059F7B8 /* Player.swift */; };
+		CA47CF90285329F00059F7B8 /* Combatant.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA47CF8F285329F00059F7B8 /* Combatant.swift */; };
+		CA47CF9228532A280059F7B8 /* Weapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA47CF9128532A280059F7B8 /* Weapon.swift */; };
+		CA47CF9428532A690059F7B8 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA47CF9328532A690059F7B8 /* Functions.swift */; };
+		CA47CF9628532C6A0059F7B8 /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA47CF9528532C6A0059F7B8 /* test.swift */; };
+		CA47CF9828533A5F0059F7B8 /* CombatantType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA47CF9728533A5F0059F7B8 /* CombatantType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +32,13 @@
 /* Begin PBXFileReference section */
 		CA47CF7F2850BA190059F7B8 /* Game3 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Game3; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA47CF822850BA190059F7B8 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		CA47CF8B285329C30059F7B8 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		CA47CF8D285329D30059F7B8 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		CA47CF8F285329F00059F7B8 /* Combatant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Combatant.swift; sourceTree = "<group>"; };
+		CA47CF9128532A280059F7B8 /* Weapon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weapon.swift; sourceTree = "<group>"; };
+		CA47CF9328532A690059F7B8 /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
+		CA47CF9528532C6A0059F7B8 /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
+		CA47CF9728533A5F0059F7B8 /* CombatantType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombatantType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,9 +71,32 @@
 		CA47CF812850BA190059F7B8 /* Game3 */ = {
 			isa = PBXGroup;
 			children = (
+				CA47CF892853298D0059F7B8 /* Modeles */,
+				CA47CF8A2853299C0059F7B8 /* Functions */,
 				CA47CF822850BA190059F7B8 /* main.swift */,
+				CA47CF9328532A690059F7B8 /* Functions.swift */,
 			);
 			path = Game3;
+			sourceTree = "<group>";
+		};
+		CA47CF892853298D0059F7B8 /* Modeles */ = {
+			isa = PBXGroup;
+			children = (
+				CA47CF8B285329C30059F7B8 /* Game.swift */,
+				CA47CF8D285329D30059F7B8 /* Player.swift */,
+				CA47CF8F285329F00059F7B8 /* Combatant.swift */,
+				CA47CF9728533A5F0059F7B8 /* CombatantType.swift */,
+				CA47CF9528532C6A0059F7B8 /* test.swift */,
+				CA47CF9128532A280059F7B8 /* Weapon.swift */,
+			);
+			path = Modeles;
+			sourceTree = "<group>";
+		};
+		CA47CF8A2853299C0059F7B8 /* Functions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Functions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -120,7 +157,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA47CF9228532A280059F7B8 /* Weapon.swift in Sources */,
+				CA47CF9828533A5F0059F7B8 /* CombatantType.swift in Sources */,
 				CA47CF832850BA190059F7B8 /* main.swift in Sources */,
+				CA47CF8E285329D30059F7B8 /* Player.swift in Sources */,
+				CA47CF8C285329C30059F7B8 /* Game.swift in Sources */,
+				CA47CF90285329F00059F7B8 /* Combatant.swift in Sources */,
+				CA47CF9428532A690059F7B8 /* Functions.swift in Sources */,
+				CA47CF9628532C6A0059F7B8 /* test.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
