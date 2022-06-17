@@ -14,7 +14,9 @@ class Combatant {
     var weapon: Weapon
     var treatment: Treatment
     
-    required init(type: CombatantType, name: String) {
+    static var namesUsed: [String] = []
+    
+    init(type: CombatantType, name: String) {
         self.type = type
         self.currentHP = type.getMaxHealth()
         self.name = name
@@ -22,6 +24,31 @@ class Combatant {
         self.treatment = type.getTreatment()
     }
     
-    static var namesUsed: [String] = []
+//    ===============================
+//     MARK: - Combatant Functions
+//    ===============================
+    
+    func attack(against defensivePlayer: Player) {
+        print("🫵 Maintenant, entrez le numéro du combattant adverse que vous souhaitez attaquer ? ")
+        let combatantReceivingAnAttack = defensivePlayer.combatantSelection()
+        // l'attaque = au minimum entre le reste de la vie du combattant ou la force de l'attaque.
+        combatantReceivingAnAttack.currentHP -= min(combatantReceivingAnAttack.currentHP, self.weapon.weaponStrength())
+        if combatantReceivingAnAttack.currentHP <= 0 {
+            if let index = defensivePlayer.playerTeam.firstIndex(where: {$0 === combatantReceivingAnAttack}) {
+                defensivePlayer.playerTeam.remove(at: index)
+            }
+            if defensivePlayer.playerTeam.count <= 0 {
+                defensivePlayer.teamIsAlive = false
+            }
+        }
+    }
+    
+    func care(by player: Player) {
+        print("🚑 Super le traitment est prêt, entrez le numéro du combattant de votre équipe que vous souhaitez soigner ? ")
+        let combatantReceivingTreatment = player.combatantSelection()
+        let newLife = combatantReceivingTreatment.currentHP + self.weapon.weaponStrength()
+        let maxHealth = combatantReceivingTreatment.type.getMaxHealth()
+        combatantReceivingTreatment.currentHP = min(newLife, maxHealth)
+    }
     
 }
