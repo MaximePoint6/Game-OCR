@@ -28,6 +28,8 @@ class Combatant {
 //     MARK: - Combatant Functions
 //    ===============================
     
+    /// Function launching an attack and allowing to choose the enemy combatant to attack and reduce his life according to the strength of the weapon.
+    /// - Parameter defensivePlayer: "defensive player": who receives the attack
     func attack(against defensivePlayer: Player) {
         print("🫵 Maintenant, entrez le numéro du combattant adverse que vous souhaitez attaquer ? ")
         let combatantReceivingAnAttack = defensivePlayer.combatantSelection()
@@ -43,6 +45,8 @@ class Combatant {
         }
     }
     
+    /// Function launching a treatment and allowing to choose the combatant to heal and to increase his life according to the strength of the treatment.
+    /// - Parameter player: Player giving treatment to one of his fighters
     func care(by player: Player) {
         print("🚑 Super le traitment est prêt, entrez le numéro du combattant de votre équipe que vous souhaitez soigner ? ")
         let combatantReceivingTreatment = player.combatantSelection()

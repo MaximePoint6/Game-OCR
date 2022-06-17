@@ -25,6 +25,7 @@ class Player: Identifiable {
 //     MARK: - Player Functions
 //    ===============================
     
+    /// Function displaying team summary
     func playerCombatantsRecap() {
         for combatant in 0..<(self.playerTeam.count) {
             print("""
@@ -33,6 +34,8 @@ class Player: Identifiable {
         }
     }
     
+    /// Function allowing the player to choose his fighter and to choose the action (treatment or attack).
+    /// - Parameter defensivePlayer: "defensive player": who receives the attack
     func attackOrTreatmentParameter(against defensivePlayer: Player) {
         print("💪 \(self.playerName), entrez le numéro de votre combattant parmi cette selection :")
         let activeCombatant = combatantSelection()
@@ -49,6 +52,8 @@ class Player: Identifiable {
         }
     }
     
+    /// Function displaying the player's combatants and allowing the player to choose their combatant. The function checks if the user has entered a good value to select his combatant, otherwise an error message is displayed)
+    /// - Returns: Combatant
     func combatantSelection() -> Combatant {
         playerCombatantsRecap()
         var readValue: Int?

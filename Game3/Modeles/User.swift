@@ -9,6 +9,12 @@ import Foundation
 
 class User {
     
+//===============================================
+// MARK: - User interactions, general functions
+//===============================================
+    
+    /// Check that the user indicates an integer, if this is not the case, an error message is displayed.
+    /// - Returns: Integer
     static func readInteger() -> Int {
         var readValue: Int?
         repeat {
@@ -22,7 +28,9 @@ class User {
         return readValue!
     }
 
-
+    
+    /// Check that the user indicates a string, if this is not the case, an error message is displayed.
+    /// - Returns: String
     static func readText() -> String {
         var text: String?
         repeat {
@@ -33,8 +41,13 @@ class User {
         } while text == nil
         return text!
     }
-
-
+    
+//===============================================
+// MARK: - User interactions, specific functions
+//===============================================
+    
+    /// Check that the user indicates an existing combatant type number, if this is not the case, an error message is displayed.
+    /// - Returns: Integer
     static func combatantChoiceToJoinTheTeam() -> Int {
         var readValue: Int?
         repeat {
@@ -48,7 +61,9 @@ class User {
         } while readValue == nil
         return readValue!
     }
-
+    
+    /// Check that the user indicates choice 1 or choice 2, if this is not the case, an error message is displayed.
+    /// - Returns: Integer
     static func select1or2() -> Int {
         var readValue: Int?
         repeat {
@@ -63,7 +78,8 @@ class User {
         return readValue!
     }
 
-
+    /// Checks that the user chooses a name that doesn't already exist, if this is not the case, an error message is displayed.
+    /// - Returns: String
     static func combatantNameVerification() -> String {
         let names = Combatant.namesUsed
         var name: String?
@@ -73,7 +89,7 @@ class User {
                 print("❌ Ce nom est déjà utilisé par un autre combattant, veuillez en choisir un autre")
                 name = nil
             }
-        } while name == nil // Attention ca fait une double boucle du coup avec name.contains(name), on verifie la et sur le if pas top niveau perf
+        } while name == nil
         Combatant.namesUsed.append(name!)
         return name!
     }

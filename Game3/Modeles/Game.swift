@@ -12,14 +12,12 @@ class Game {
     
     static let numbersOfPlayers = 2
     
-    func welcome() {
-        print("⚔️⚔️⚔️ Bonjour, commençons une nouvelle partie ! ⚔️⚔️⚔️")
-    }
-    
 //======================
 // MARK: - PlayersSettings
 //======================
     
+    
+    /// Function with a loop based on the number of players in the game. Allows players to choose their name and teams.
     func playersSettings () {
         for playerNumber in 1...Game.numbersOfPlayers {
             let playerName = choiceOfName(playerNumber: playerNumber)
@@ -29,14 +27,15 @@ class Game {
         }
     }
     
+    /// Function allowing the player to choose his nickname
     func choiceOfName(playerNumber: Int) -> String {
         print("Joueur \(playerNumber) - Quel est votre prénom ?")
         return User.readText()
     }
     
-    /// Description
-    /// - Parameter playerName: playerName description
-    /// - Returns: description
+    /// Function allowing the player to select the combatants joining his team
+    /// - Parameter playerName: player name
+    /// - Returns: table of fighters corresponding to the player team
     func teamSelection(playerName: String) -> [Combatant] {
         var combatants = [Combatant]()
         print("Bienvenue \(playerName) 🤝 - Veuillez choisir \(Player.numberOfCombatants) personnages pour rejoindre votre équipe. Voici les personnages disponibles :")
@@ -67,6 +66,12 @@ class Game {
 // MARK: - GameSettings & Recap
 //===============================
     
+    /// Function displaying a welcome message
+    func welcome() {
+        print("⚔️⚔️⚔️ Bonjour, commençons une nouvelle partie ! ⚔️⚔️⚔️")
+    }
+    
+    /// Function displaying teams summary
     func gameRecap() {
         print("Voici un résumé du jeu")
         print("")
@@ -77,6 +82,7 @@ class Game {
         print("----------")
     }
     
+    /// Function starting the fight, which allows players to take turns, and which continues as long as there is no losing team
     func combat() {
         var attackingPlayer = firstPlayerToPlay()
         var defendingPlayer: Player
@@ -97,12 +103,16 @@ class Game {
         winner(roundNumber: roundNumber)
     }
     
+    /// Function determining the first player in the game (randomly)
+    /// - Returns: first player
     func firstPlayerToPlay() -> Player {
         let randomInt = Int.random(in: 0..<Game.numbersOfPlayers)
         print("\(self.players[randomInt].playerName), Vous avez été tiré au sort pour commencer la partie ! 😃")
         return self.players[randomInt]
     }
     
+    /// Function displaying the winner and the game statistics
+    /// - Parameter roundNumber: roundNumber
     func winner(roundNumber: Int) {
         let winner: Player
         if self.players[0].teamIsAlive == true {
