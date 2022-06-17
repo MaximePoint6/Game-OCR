@@ -7,19 +7,9 @@
 
 import Foundation
 
-
-// TODO: - Urgent
-// Faire la documentation
-// Mettre qq commentaires
-// Et normalement c'est fini :)
-
-// Pour la fonction ou on verifie les noms des combattants : utilisrr plutot .map etc
-
-
 // MARK: - Main
 
 mainFunction()
-
 
 func mainFunction() {
     let game = Game()
@@ -30,3 +20,4 @@ func mainFunction() {
     print("💥💥💥 Le combat peut maintenant commencer ! 💥💥💥")
     game.combat()
 }
+
