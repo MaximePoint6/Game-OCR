@@ -14,8 +14,6 @@ class Combatant {
     var weapon: Weapon
     var treatment: Treatment
     
-    //static var namesUsed: [String] = []
-    
     init(type: CombatantType, name: String) {
         self.type = type
         self.currentHP = type.getMaxHealth()
