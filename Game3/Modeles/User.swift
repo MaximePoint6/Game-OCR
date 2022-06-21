@@ -9,16 +9,16 @@ import Foundation
 
 class User {
     
-//===============================================
-// MARK: - User interactions, general functions
-//===============================================
+    //===============================================
+    // MARK: - User interactions, general functions
+    //===============================================
     
     /// Check that the user indicates an integer, if this is not the case, an error message is displayed.
     /// - Returns: Integer
-    static func readInteger() -> Int {
+    static func enterInteger() -> Int {
         var readValue: Int?
         repeat {
-            let rawValue = readText()
+            let rawValue = enterText()
             if let value = Int(rawValue) {
                 readValue = value
             } else {
@@ -27,11 +27,11 @@ class User {
         } while readValue == nil
         return readValue!
     }
-
+    
     
     /// Check that the user indicates a string, if this is not the case, an error message is displayed.
     /// - Returns: String
-    static func readText() -> String {
+    static func enterText() -> String {
         var text: String?
         repeat {
             text = readLine()
@@ -42,16 +42,16 @@ class User {
         return text!
     }
     
-//===============================================
-// MARK: - User interactions, specific functions
-//===============================================
+    //===============================================
+    // MARK: - User interactions, specific functions
+    //===============================================
     
     /// Check that the user indicates an existing combatant type number, if this is not the case, an error message is displayed.
     /// - Returns: Integer
     static func combatantChoiceToJoinTheTeam() -> Int {
         var readValue: Int?
         repeat {
-            let rawValue = readInteger()
+            let rawValue = enterInteger()
             if rawValue <= CombatantType.allCases.count && rawValue > 0 {
                 readValue = rawValue
             } else {
@@ -67,7 +67,7 @@ class User {
     static func select1or2() -> Int {
         var readValue: Int?
         repeat {
-            let rawValue = readInteger()
+            let rawValue = enterInteger()
             if rawValue <= 2 && rawValue > 0 {
                 readValue = rawValue
             } else {
@@ -77,21 +77,18 @@ class User {
         } while readValue == nil
         return readValue!
     }
-
+    
     /// Checks that the user chooses a name that doesn't already exist, if this is not the case, an error message is displayed.
     /// - Returns: String
-    static func combatantNameVerification() -> String {
-        let names = Combatant.namesUsed
+    static func combatantNameVerification(game: Game) -> String {
         var name: String?
         repeat {
-            name = readText().uppercased()
-            if names.contains(name!) {
+            name = enterText().uppercased()
+            if  game.getAllCombatantsNames().contains(name!) {
                 print("❌ Ce nom est déjà utilisé par un autre combattant, veuillez en choisir un autre")
                 name = nil
             }
         } while name == nil
-        Combatant.namesUsed.append(name!)
         return name!
     }
-  
 }

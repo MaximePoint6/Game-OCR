@@ -14,7 +14,7 @@ class Combatant {
     var weapon: Weapon
     var treatment: Treatment
     
-    static var namesUsed: [String] = []
+    //static var namesUsed: [String] = []
     
     init(type: CombatantType, name: String) {
         self.type = type
@@ -33,8 +33,9 @@ class Combatant {
     func attack(against defensivePlayer: Player) {
         print("🫵 Maintenant, entrez le numéro du combattant adverse que vous souhaitez attaquer ? ")
         let combatantReceivingAnAttack = defensivePlayer.combatantSelection()
-        // l'attaque = au minimum entre le reste de la vie du combattant ou la force de l'attaque.
-        combatantReceivingAnAttack.currentHP -= min(combatantReceivingAnAttack.currentHP, self.weapon.weaponStrength())
+        
+        let attackPoints = min(combatantReceivingAnAttack.currentHP, self.weapon.weaponStrength())
+        combatantReceivingAnAttack.currentHP -= attackPoints
         if combatantReceivingAnAttack.currentHP <= 0 {
             if let index = defensivePlayer.playerTeam.firstIndex(where: {$0 === combatantReceivingAnAttack}) {
                 defensivePlayer.playerTeam.remove(at: index)
@@ -43,6 +44,8 @@ class Combatant {
                 defensivePlayer.teamIsAlive = false
             }
         }
+        defensivePlayer.attacksReceived += attackPoints
+        print("⚔️ \(combatantReceivingAnAttack.name) a perdu \(attackPoints) point(s) de vie suite à l'attaque du combattant \(self.name).")
     }
     
     /// Function launching a treatment and allowing to choose the combatant to heal and to increase his life according to the strength of the treatment.
@@ -50,9 +53,13 @@ class Combatant {
     func care(by player: Player) {
         print("🚑 Super le traitment est prêt, entrez le numéro du combattant de votre équipe que vous souhaitez soigner ? ")
         let combatantReceivingTreatment = player.combatantSelection()
+        
         let newLife = combatantReceivingTreatment.currentHP + self.weapon.weaponStrength()
         let maxHealth = combatantReceivingTreatment.type.getMaxHealth()
-        combatantReceivingTreatment.currentHP = min(newLife, maxHealth)
+        let treatmentPoints = min(newLife, maxHealth) - combatantReceivingTreatment.currentHP
+        combatantReceivingTreatment.currentHP += treatmentPoints
+        player.treatmentsReceived += treatmentPoints
+        print("❤️ \(combatantReceivingTreatment.name) a gagné \(treatmentPoints) point(s) de vie grâce au soin du combattant \(self.name).")
     }
     
 }

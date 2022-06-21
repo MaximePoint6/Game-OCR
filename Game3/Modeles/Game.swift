@@ -12,9 +12,9 @@ class Game {
     
     static let numbersOfPlayers = 2
     
-//======================
-// MARK: - PlayersSettings
-//======================
+    //======================
+    // MARK: - PlayersSettings
+    //======================
     
     
     /// Function with a loop based on the number of players in the game. Allows players to choose their name and teams.
@@ -30,7 +30,7 @@ class Game {
     /// Function allowing the player to choose his nickname
     func choiceOfName(playerNumber: Int) -> String {
         print("Joueur \(playerNumber) - Quel est votre prénom ?")
-        return User.readText()
+        return User.enterText()
     }
     
     /// Function allowing the player to select the combatants joining his team
@@ -43,7 +43,7 @@ class Game {
         
         for combatantType in CombatantType.allCases {
             print("""
-                Combattant \(counter) : \(combatantType.getName()) - Vie max : \(combatantType.getMaxHealth()) - Arme : \(combatantType.getWeapon().getName()) - Puissance de l'arme : \(combatantType.getWeapon().weaponStrength()) - puissance du traitement : \(combatantType.getTreatment().treatmentStrength())
+                Combattant \(counter) : \(combatantType.getName()) // Vie max : \(combatantType.getMaxHealth()) // Arme : \(combatantType.getWeapon().getName()) // Puissance de l'arme : \(combatantType.getWeapon().weaponStrength()) // Puissance du traitement : \(combatantType.getTreatment().treatmentStrength()).
                 """)
             counter += 1
         }
@@ -55,16 +55,24 @@ class Game {
             let choice = User.combatantChoiceToJoinTheTeam()
             
             print("🗣 Quel surnom souhaitez-vous lui donner ?")
-            let combatantName = User.combatantNameVerification()
+            let combatantName = User.combatantNameVerification(game: self)
             let selectedCombatant = Combatant(type: CombatantType.allCases[choice-1], name: combatantName)
             combatants.append(selectedCombatant)
         }
         return combatants
     }
     
-//===============================
-// MARK: - GameSettings & Recap
-//===============================
+    /// Function allowing to return an array with the names of all the combatants in the game.
+    /// - Returns: array with the names of all the combatants in the game
+    func getAllCombatantsNames() -> [String] {
+        return self.players.flatMap { $0.playerTeam }
+            .map { $0.name }
+            .sorted { $0 > $1 }
+    }
+    
+    //===============================
+    // MARK: - GameSettings & Recap
+    //===============================
     
     /// Function displaying a welcome message
     func welcome() {
@@ -115,15 +123,39 @@ class Game {
     /// - Parameter roundNumber: roundNumber
     func winner(roundNumber: Int) {
         let winner: Player
+        let looser: Player
         if self.players[0].teamIsAlive == true {
             winner = self.players[0]
+            looser = self.players[1]
         } else {
             winner = self.players[1]
+            looser = self.players[0]
         }
-        print("---------- La partie est finie ! ----------")
-        print("🎉🎉🎉 Bravo \(winner.playerName), vous avez gagné cette partie en \(roundNumber / 2) attaques ! 🎉🎉🎉")
-        print("Voici les combattants encore vivants dans ton équipe 💪 :")
+        print("""
+        
+        
+        ##   ##   ####      ####   ######    #####    ####    ######   #######             ##
+        ##   ##    ##      ##  ##  # ## #   ##   ##    ##      ##  ##   ##   #            ####
+         ## ##     ##     ##         ##     ##   ##    ##      ##  ##   ## #              ####
+         ## ##     ##     ##         ##     ##   ##    ##      #####    ####               ##
+          ###      ##     ##         ##     ##   ##    ##      ## ##    ## #               ##
+          ###      ##      ##  ##    ##     ##   ##    ##      ##  ##   ##   #
+           #      ####      ####    ####     #####    ####    #### ##  #######             ##
+
+        🎉🎉🎉 Bravo \(winner.playerName), vous avez gagné cette partie en \(roundNumber / 2) attaques ! 🎉🎉🎉
+
+""")
+        print("Voici vos combattants survivants après ce combat 💪 :")
         winner.playerCombatantsRecap()
+        print("""
+        Et voici, les stastitiques de la partie 📊 :
+        Équipe de \(winner.playerName) :
+        ⚔️ Attaques subies (en points de vie) : \(winner.attacksReceived) pts.
+        🚑 Traitements reçus (en points de vie) : \(winner.treatmentsReceived) pts.
+        Équipe de \(looser.playerName) :
+        ⚔️ Attaques subies (en points de vie) : \(looser.attacksReceived) pts.
+        🚑 Traitements reçus (en points de vie) : \(looser.treatmentsReceived) pts.
+        """)
     }
     
 }

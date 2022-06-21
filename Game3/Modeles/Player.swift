@@ -12,13 +12,17 @@ class Player: Identifiable {
     var playerName: String
     var playerTeam: [Combatant]
     var teamIsAlive: Bool
+    var attacksReceived: Int
+    var treatmentsReceived: Int
     
     static let numberOfCombatants = 3
     
-    init(playerName: String, playerTeam: [Combatant], teamIsAlive: Bool = true) {
+    init(playerName: String, playerTeam: [Combatant], teamIsAlive: Bool = true, attacksReceived: Int = 0, treatmentsReceived: Int = 0) {
         self.playerName = playerName
         self.playerTeam = playerTeam
         self.teamIsAlive = teamIsAlive
+        self.attacksReceived = attacksReceived
+        self.treatmentsReceived = treatmentsReceived
     }
     
 //    ===============================
@@ -29,7 +33,7 @@ class Player: Identifiable {
     func playerCombatantsRecap() {
         for combatant in 0..<(self.playerTeam.count) {
             print("""
-                Combattant \(combatant+1)- "\(self.playerTeam[combatant].name)" - vie : \(self.playerTeam[combatant].currentHP) - puissance de l'arme : \(self.playerTeam[combatant].weapon.weaponStrength()) - Puissance du traitement : \(self.playerTeam[combatant].treatment.treatmentStrength()))
+                Combattant \(combatant+1)- "\(self.playerTeam[combatant].name)" // Vie : \(self.playerTeam[combatant].currentHP) // Puissance de l'arme : \(self.playerTeam[combatant].weapon.weaponStrength()) // Puissance du traitement : \(self.playerTeam[combatant].treatment.treatmentStrength()).
                 """)
         }
     }
@@ -58,7 +62,7 @@ class Player: Identifiable {
         playerCombatantsRecap()
         var readValue: Int?
         repeat {
-            let rawValue = User.readInteger()
+            let rawValue = User.enterInteger()
             if rawValue <= playerTeam.count && rawValue > 0 {
                 readValue = rawValue
             } else {

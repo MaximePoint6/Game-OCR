@@ -9,6 +9,8 @@ import Foundation
 
 // MARK: - Main
 
+// Faire diagramme de classe et le mettre dans le powerpoint puis dans le dossier livrable pour le mentor
+
 mainFunction()
 
 func mainFunction() {
