@@ -38,9 +38,6 @@ class Combatant {
             if let index = defensivePlayer.playerTeam.firstIndex(where: {$0 === combatantReceivingAnAttack}) {
                 defensivePlayer.playerTeam.remove(at: index)
             }
-            if defensivePlayer.playerTeam.count <= 0 {
-                defensivePlayer.teamIsAlive = false
-            }
         }
         defensivePlayer.attacksReceived += attackPoints
         print("⚔️ \(combatantReceivingAnAttack.name) a perdu \(attackPoints) point(s) de vie suite à l'attaque du combattant \(self.name).")

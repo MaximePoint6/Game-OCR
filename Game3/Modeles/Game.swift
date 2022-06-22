@@ -30,7 +30,7 @@ class Game {
     /// Function allowing the player to choose his nickname
     func choiceOfName(playerNumber: Int) -> String {
         print("Joueur \(playerNumber) - Quel est votre prénom ?")
-        return User.enterText()
+        return UserEntryManager.enterText()
     }
     
     /// Function allowing the player to select the combatants joining his team
@@ -52,10 +52,10 @@ class Game {
         
         for i in 1...Player.numberOfCombatants {
             print("\(playerName), entrez le numéro du personnage que vous souhaitez dans votre équipe (combattant n°\(i) sur \(Player.numberOfCombatants) rejoignant votre équipe)")
-            let choice = User.combatantChoiceToJoinTheTeam()
+            let choice = UserEntryManager.combatantChoiceToJoinTheTeam()
             
             print("🗣 Quel surnom souhaitez-vous lui donner ?")
-            let combatantName = User.combatantNameVerification(game: self)
+            let combatantName = UserEntryManager.combatantNameVerification(game: self)
             let selectedCombatant = Combatant(type: CombatantType.allCases[choice-1], name: combatantName)
             combatants.append(selectedCombatant)
         }
@@ -142,7 +142,7 @@ class Game {
           ###      ##      ##  ##    ##     ##   ##    ##      ##  ##   ##   #
            #      ####      ####    ####     #####    ####    #### ##  #######             ##
 
-        🎉🎉🎉 Bravo \(winner.playerName), vous avez gagné cette partie en \(roundNumber / 2) attaques ! 🎉🎉🎉
+        🎉🎉🎉 Bravo \(winner.playerName), vous avez gagné cette partie en \((roundNumber / 2) + 1) attaques ! 🎉🎉🎉
 
 """)
         print("Voici vos combattants survivants après ce combat 💪 :")

@@ -11,16 +11,20 @@ class Player: Identifiable {
     let id = UUID()
     var playerName: String
     var playerTeam: [Combatant]
-    var teamIsAlive: Bool
     var attacksReceived: Int
     var treatmentsReceived: Int
     
+    var teamIsAlive: Bool {
+        get {
+            return self.playerTeam.filter { $0.currentHP > 0 }.count > 0
+        }
+    }
+    
     static let numberOfCombatants = 3
     
-    init(playerName: String, playerTeam: [Combatant], teamIsAlive: Bool = true, attacksReceived: Int = 0, treatmentsReceived: Int = 0) {
+    init(playerName: String, playerTeam: [Combatant], attacksReceived: Int = 0, treatmentsReceived: Int = 0) {
         self.playerName = playerName
         self.playerTeam = playerTeam
-        self.teamIsAlive = teamIsAlive
         self.attacksReceived = attacksReceived
         self.treatmentsReceived = treatmentsReceived
     }
@@ -45,7 +49,7 @@ class Player: Identifiable {
         let activeCombatant = combatantSelection()
         if activeCombatant.treatment != .None {
             print("👉 Ce combatant possede un traitement pour soigner un de vos combattants, que souhaitez-vous faire : 1- Soigner 🚑 ou 2- Attaquer ⚔️ ?")
-            let choice = User.select1or2()
+            let choice = UserEntryManager.select1or2()
             if choice == 1 {
                 activeCombatant.care(by: self)
             } else {
@@ -62,7 +66,7 @@ class Player: Identifiable {
         playerCombatantsRecap()
         var readValue: Int?
         repeat {
-            let rawValue = User.enterInteger()
+            let rawValue = UserEntryManager.enterInteger()
             if rawValue <= playerTeam.count && rawValue > 0 {
                 readValue = rawValue
             } else {

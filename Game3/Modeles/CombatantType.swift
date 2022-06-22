@@ -42,10 +42,8 @@ enum CombatantType: CaseIterable {
     
     public func getTreatment() -> Treatment {
         switch self {
-        case .Warrior: return .None
+        case .Warrior, .Colossus, .Dwarf: return .None
         case .Magus: return .MagicPotion
-        case .Colossus: return .None
-        case .Dwarf: return .None
         }
     }
 }

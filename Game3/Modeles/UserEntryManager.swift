@@ -1,5 +1,5 @@
 //
-//  User.swift
+//  UserEntryManager.swift
 //  Game3
 //
 //  Created by Maxime Point on 17/06/2022.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class User {
+class UserEntryManager {
     
     //===============================================
     // MARK: - User interactions, general functions
