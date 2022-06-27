@@ -71,14 +71,14 @@
 		CA47CF812850BA190059F7B8 /* Game3 */ = {
 			isa = PBXGroup;
 			children = (
-				CA47CF892853298D0059F7B8 /* Modeles */,
+				CA47CF892853298D0059F7B8 /* Models */,
 				CA47CF8A2853299C0059F7B8 /* Functions */,
 				CA47CF9D285CA5B40059F7B8 /* main.swift */,
 			);
 			path = Game3;
 			sourceTree = "<group>";
 		};
-		CA47CF892853298D0059F7B8 /* Modeles */ = {
+		CA47CF892853298D0059F7B8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				CA47CF9B285C55C10059F7B8 /* UserEntryManager.swift */,
@@ -89,7 +89,7 @@
 				CA47CF9128532A280059F7B8 /* Weapon.swift */,
 				CA47CF99285390490059F7B8 /* Treatment.swift */,
 			);
-			path = Modeles;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		CA47CF8A2853299C0059F7B8 /* Functions */ = {
